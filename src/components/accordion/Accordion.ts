@@ -1,5 +1,13 @@
-import { css, html, LitElement, PropertyValues, TemplateResult } from "lit";
+import {
+  css,
+  CSSResult,
+  html,
+  LitElement,
+  PropertyValues,
+  TemplateResult,
+} from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import "@shoelace-style/shoelace/dist/components/icon/icon.js";
 
 @customElement("my-fancy-accordion")
@@ -24,17 +32,20 @@ export class Accordion extends LitElement {
 
   // Define the template of the element
   render(): TemplateResult {
+    const classes = {
+      hidden: !this.numberPoint,
+    };
     return html`
       <div
         role="button"
         class="accordion"
         part="accordion"
-        @click="${this.toggle}"
+        @click="${this.toggleAccordionPanel}"
       >
         <div class="title no-wrap">${this.title}</div>
-        <div class="number-point">${this.numberPoint}</div>
+        <div class="number-point ${classMap(classes)}">${this.numberPoint}</div>
         <div class="toggled-text no-wrap">${this.toggledText}</div>
-        <sl-icon name="caret-down"></sl-icon>
+        <sl-icon name=${this.open ? "caret-down" : "caret-up"}></sl-icon>
       </div>
       <div class="panel" part="panel">
         <slot></slot>
@@ -47,7 +58,7 @@ export class Accordion extends LitElement {
   }
 
   // Define the method to toggle the accordion state
-  private toggle(): void {
+  private toggleAccordionPanel(): void {
     this.open = !this.open; // Toggle the open property
     if (this._panel) {
       if (this.open) {
@@ -62,7 +73,7 @@ export class Accordion extends LitElement {
     }
   }
 
-  static styles = css`
+  static styles: CSSResult = css`
     .accordion {
       background-color: var(--my-light-black);
       color: var(--white);
@@ -77,6 +88,7 @@ export class Accordion extends LitElement {
       grid-template-rows: 1fr;
       column-gap: 0.1rem;
       border-radius: 10px;
+      margin-bottom: var(--accordion-margin-bottom, 0);
     }
     .toggled-text {
       display: flex;
@@ -109,10 +121,13 @@ export class Accordion extends LitElement {
       overflow: hidden;
       transition: max-height 0.2s ease-out;
       position: relative;
-      bottom: 0.5rem;
+      bottom: 0.7rem;
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
       color: var(--white);
+    }
+    .hidden {
+      visibility: hidden;
     }
   `;
 }
