@@ -38,9 +38,11 @@ export class Accordion extends LitElement {
     return html`
       <div
         role="button"
+        tabindex="0"
         class="accordion"
         part="accordion"
         @click="${this.toggleAccordionPanel}"
+        @keydown=${this.onEnterEvent}
       >
         <div class="title no-wrap">${this.title}</div>
         <div class="number-point ${classMap(classes)}">${this.numberPoint}</div>
@@ -55,6 +57,13 @@ export class Accordion extends LitElement {
 
   protected firstUpdated(): void {
     this._panel = this.renderRoot.querySelector(".panel"); // Get the panel element
+  }
+
+  private onEnterEvent(event: KeyboardEvent) {
+    if (event.key === "Enter") {
+      // Trigger the click event
+      this.toggleAccordionPanel();
+    }
   }
 
   // Define the method to toggle the accordion state
@@ -79,7 +88,7 @@ export class Accordion extends LitElement {
       color: var(--white);
       cursor: pointer;
       padding: 18px;
-      border: none;
+      border: 1px solid #000;
       text-align: left;
       outline: none;
       transition: 0.4s;
@@ -89,6 +98,9 @@ export class Accordion extends LitElement {
       column-gap: 0.1rem;
       border-radius: 10px;
       margin-bottom: var(--accordion-margin-bottom, 0);
+    }
+    .accordion:focus {
+      border: 5px solid var(--my-violet-blue);
     }
     .toggled-text {
       display: flex;
