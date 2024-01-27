@@ -1,9 +1,9 @@
 {
-  "name": "@my-repo/my-fancy-accordion",
+  "name": "@my-repo/my-switch",
   "version": "1.0.0",
   "type": "module",
-  "description": "Custom element that implements a collapsible content panel.",
-  "main": "./dist/my-fancy-accordion.js",
+  "description": "Custom element that implements switch.",
+  "main": "./dist/my-switch.js",
   "files": [
     "./dist"
   ],
