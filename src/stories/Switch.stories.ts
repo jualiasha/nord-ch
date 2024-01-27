@@ -9,6 +9,9 @@ const getMySwitch = (args: MySwitch): TemplateResult => {
     .size=${args.size}
     ?checked=${args.checked}
     ?disabled=${args.disabled}
+    ?required=${args.required}
+    @my-switch-change=${(e: { detail: { checked: boolean } }) =>
+      console.log(e.detail.checked)}
   >
   </my-switch>`;
 };
@@ -31,6 +34,7 @@ const meta = {
     },
     checked: { control: "boolean" },
     disabled: { control: "boolean" },
+    required: { control: "boolean" },
   },
 } satisfies Meta<MySwitch>;
 
@@ -40,23 +44,37 @@ type Story = StoryObj<MySwitch>;
 export const Default: Story = {
   args: {
     size: "medium",
-    checked: true,
+    checked: false,
     disabled: false,
+    required: true,
   },
 };
 
 export const Small: Story = {
   args: {
+    ...Default.args,
     size: "small",
-    checked: true,
-    disabled: false,
   },
 };
 
 export const Large: Story = {
   args: {
+    ...Default.args,
     size: "large",
     checked: true,
-    disabled: false,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    ...Default.args,
+    disabled: true,
+  },
+};
+
+export const Required: Story = {
+  args: {
+    ...Default.args,
+    required: true,
   },
 };

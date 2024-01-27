@@ -1,6 +1,7 @@
-import { LitElement, html, CSSResult } from "lit";
+import { LitElement, html, CSSResult, PropertyValues } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { when } from "lit/directives/when.js";
 import { switchStyles } from "./styles.ts";
 
 @customElement("my-switch")
@@ -13,22 +14,29 @@ export class MySwitch extends LitElement {
   disabled = false;
 
   @property({ type: Boolean })
-  indeterminate = false;
+  required = false;
 
-  public defaultChecked: boolean = false;
   public size: string = "medium";
+  private _inputElement: null | HTMLInputElement = null;
 
   // Define the event listeners for the switch component
   connectedCallback() {
     super.connectedCallback();
     // Add a click listener to toggle the switch
-    this.addEventListener("click", this.handleClick);
+    //this.addEventListener("click", this.handleClick);
     // Add a change listener to update the switch state
-    this.addEventListener("change", this.handleChange);
+    //this.addEventListener("change", this.handleChange);
     // Add a focus listener to add a focus ring to the switch
     this.addEventListener("focus", this.handleFocus);
     // Add a blur listener to remove the focus ring from the switch
     this.addEventListener("blur", this.handleBlur);
+  }
+
+  protected willUpdate(_changedProperties: PropertyValues) {
+    if (_changedProperties.has("checked")) {
+      this._handleInputElementChecked();
+      this._sendOnChangeEvent();
+    }
   }
 
   // Define the template of the switch component
@@ -37,27 +45,49 @@ export class MySwitch extends LitElement {
       small: this.size === "small",
       medium: this.size === "medium",
       large: this.size === "large",
+      disabled: this.disabled,
     };
     return html`
-      <input type="checkbox" id="toggle" />
-      <div class=${classMap(classes)}>
+      <input
+        ?required=${this.required}
+        type="checkbox"
+        id="toggle"
+        @click=${(e: InputEvent) => e.preventDefault()}
+      />
+      <div class=${classMap(classes)} @click=${this.handleClick}>
         <label for="toggle"></label>
+        ${when(this.required, () => html`<span class="required">*</span>`)}
       </div>
     `;
   }
 
-  // Define the methods for the switch component
-  handleClick() {
-    // If the switch is not disabled, toggle its checked state
-    if (!this.disabled) {
-      this.checked = !this.checked;
+  protected firstUpdated(_changedProperties: PropertyValues): void {
+    this._inputElement = this.renderRoot.querySelector("input");
+    this._handleInputElementChecked();
+  }
+
+  private _handleInputElementChecked(): void {
+    if (this._inputElement) {
+      this._inputElement.checked = this.checked;
     }
   }
 
-  handleChange() {
-    // If the switch is checked, set its indeterminate state to false
-    if (this.checked) {
-      this.indeterminate = false;
+  private _sendOnChangeEvent() {
+    const options = {
+      detail: {
+        checked: this.checked,
+      },
+      bubbles: true,
+      composed: true,
+    };
+    this.dispatchEvent(new CustomEvent("my-switch-change", options));
+  }
+
+  // Define the methods for the switch component
+  handleClick(): void {
+    // If the switch is not disabled, toggle its checked state
+    if (!this.disabled) {
+      this.checked = !this.checked;
     }
   }
 
@@ -75,8 +105,8 @@ export class MySwitch extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     // Remove the event listeners from the switch
-    this.removeEventListener("click", this.handleClick);
-    this.removeEventListener("change", this.handleChange);
+    //this.removeEventListener("click", this.handleClick);
+    //this.removeEventListener("change", this.handleChange);
     this.removeEventListener("focus", this.handleFocus);
     this.removeEventListener("blur", this.handleBlur);
   }

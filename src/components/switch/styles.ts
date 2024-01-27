@@ -13,6 +13,10 @@ export const switchStyles = css`
     display: none;
   }
 
+  //input[type="checkbox"] :focus {
+  //  border: 20px solid var(--my-dark-yellow);
+  //}
+
   /*Button is :CHECKED*/
 
   input[type="checkbox"]:checked ~ div {
@@ -88,6 +92,10 @@ export const switchStyles = css`
     cursor: pointer;
   }
 
+  .disabled label {
+    background: var(--my-light-black);
+  }
+
   label::before {
     content: "off";
     width: 0;
@@ -141,5 +149,21 @@ export const switchStyles = css`
 
   input[type="checkbox"]:checked ~ .large label::before {
     left: 7px;
+  }
+
+  .required {
+    color: darkred;
+    position: absolute;
+  }
+
+  .small .required {
+    left: 2.3rem;
+  }
+
+  .medium .required {
+    left: 3rem;
+  }
+  .large .required {
+    left: 3.5rem;
   }
 `;
