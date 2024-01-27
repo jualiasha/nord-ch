@@ -2,15 +2,9 @@ import type { Meta, StoryObj } from "@storybook/web-components";
 import "../components/accordion/my-fancy-acordion.ts";
 import Readme from "../components/accordion/README.md";
 import { html, TemplateResult } from "lit";
+import { Accordion } from "../components/accordion/Accordion.ts";
 
-interface IAccordion {
-  title: string;
-  open: boolean;
-  toggledText: string;
-  numberPoint: number | null;
-}
-
-const getMyAccordion = (args: IAccordion) => {
+const getMyAccordion = (args: Accordion) => {
   return html`<my-fancy-accordion
     ?open=${args.open}
     .title=${args.title}
@@ -38,12 +32,12 @@ const meta = {
     toggledText: { control: "text" },
     numberPoint: { control: "number" },
   },
-} satisfies Meta<IAccordion>;
+} satisfies Meta<Accordion>;
 
 export default meta;
-type Story = StoryObj<IAccordion>;
+type Story = StoryObj<Accordion>;
 
-function TemplateWIthSeveralPanels(args: IAccordion): TemplateResult {
+function TemplateWIthSeveralPanels(args: Accordion): TemplateResult {
   return html`
     <style>
       my-fancy-accordion {
@@ -51,13 +45,13 @@ function TemplateWIthSeveralPanels(args: IAccordion): TemplateResult {
       }
     </style>
     ${getMyAccordion(args)}
-    ${getMyAccordion({ ...args, title: "Loans", toggledText: "" })}
+    ${getMyAccordion({ ...args, title: "Loans", toggledText: "" } as Accordion)}
     ${getMyAccordion({
       ...args,
       title: "Contacts",
       numberPoint: null,
       toggledText: "",
-    })}
+    } as Accordion)}
   `;
 }
 

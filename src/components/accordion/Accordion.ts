@@ -1,11 +1,4 @@
-import {
-  css,
-  CSSResult,
-  html,
-  LitElement,
-  PropertyValues,
-  TemplateResult,
-} from "lit";
+import { css, CSSResult, html, LitElement, TemplateResult } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import "@shoelace-style/shoelace/dist/components/icon/icon.js";
@@ -25,10 +18,6 @@ export class Accordion extends LitElement {
   public numberPoint: number | null = null;
   // query for accordion panel
   private _panel: HTMLElement | null = null;
-
-  protected willUpdate(_changedProperties: PropertyValues) {
-    console.log(_changedProperties);
-  }
 
   // Define the template of the element
   render(): TemplateResult {
@@ -100,7 +89,7 @@ export class Accordion extends LitElement {
       margin-bottom: var(--accordion-margin-bottom, 0);
     }
     .accordion:focus {
-      border: 5px solid var(--my-violet-blue);
+      border: 3px solid var(--my-violet-blue);
     }
     .toggled-text {
       display: flex;
