@@ -5,7 +5,11 @@ import { html, TemplateResult } from "lit";
 import { MySwitch } from "../components/switch/Switch.ts";
 
 const getMySwitch = (args: MySwitch): TemplateResult => {
-  return html` <my-switch ?checked=${args.checked} ?disabled=${args.disabled}>
+  return html` <my-switch
+    .size=${args.size}
+    ?checked=${args.checked}
+    ?disabled=${args.disabled}
+  >
   </my-switch>`;
 };
 
@@ -21,6 +25,10 @@ const meta = {
   },
   render: (args: MySwitch) => getMySwitch(args),
   argTypes: {
+    size: {
+      control: { type: "select" },
+      options: ["small", "medium", "large"],
+    },
     checked: { control: "boolean" },
     disabled: { control: "boolean" },
   },
@@ -29,8 +37,25 @@ const meta = {
 export default meta;
 type Story = StoryObj<MySwitch>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
+    size: "medium",
+    checked: true,
+    disabled: false,
+  },
+};
+
+export const Small: Story = {
+  args: {
+    size: "small",
+    checked: true,
+    disabled: false,
+  },
+};
+
+export const Large: Story = {
+  args: {
+    size: "large",
     checked: true,
     disabled: false,
   },

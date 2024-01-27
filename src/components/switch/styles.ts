@@ -13,18 +13,6 @@ export const switchStyles = css`
     display: none;
   }
 
-  a {
-    color: rgba(43, 43, 43, 1);
-    text-decoration: none;
-    padding: 10px;
-    border-bottom: 2px solid rgba(43, 43, 43, 1);
-  }
-
-  a:hover {
-    background: rgba(43, 43, 43, 1);
-    color: rgba(255, 255, 255, 1);
-  }
-
   /*Button is :CHECKED*/
 
   input[type="checkbox"]:checked ~ div {
@@ -33,8 +21,19 @@ export const switchStyles = css`
   }
 
   input[type="checkbox"]:checked ~ div label {
-    left: 20px;
     transform: rotate(360deg);
+  }
+
+  input[type="checkbox"]:checked ~ .small label {
+    left: 15px;
+  }
+
+  input[type="checkbox"]:checked ~ .medium label {
+    left: 20px;
+  }
+
+  input[type="checkbox"]:checked ~ .large label {
+    left: 20px;
   }
 
   /*shared*/
@@ -46,17 +45,42 @@ export const switchStyles = css`
 
   /*'un':checked state*/
 
-  div {
+  .small {
+    height: 15px;
+    width: 35px;
+  }
+  .small label {
+    height: 15px;
+    width: 20px;
+  }
+
+  .medium {
     height: 20px;
     width: 45px;
+  }
+
+  .medium label {
+    height: 20px;
+    width: 25px;
+  }
+
+  .large {
+    height: 25px;
+    width: 50px;
+  }
+
+  .large label {
+    height: 25px;
+    width: 30px;
+  }
+
+  div {
     background: rgba(43, 43, 43, 1);
     position: relative;
     box-shadow: 0 0 2px rgba(43, 43, 43, 1);
   }
 
   label {
-    height: 20px;
-    width: 25px;
     background: var(--my-dark-yellow);
     position: absolute;
     top: 0;
@@ -67,10 +91,22 @@ export const switchStyles = css`
   label::before {
     content: "off";
     width: 0;
-    font-size: 14px;
     position: absolute;
-    left: 3px;
     top: 0;
+  }
+
+  .small label::before {
+    font-size: 12px;
+    left: 2px;
+  }
+
+  .medium label::before {
+    font-size: 14px;
+    left: 3px;
+  }
+
+  .large label::before {
+    left: 4px;
   }
 
   label::before,
@@ -88,10 +124,22 @@ export const switchStyles = css`
   input[type="checkbox"]:checked ~ div label::before {
     content: "on";
     width: 0;
-    font-size: 14px;
     position: absolute;
-    left: 5px;
     top: 0;
     background: var(--my-violet-blue);
+  }
+
+  input[type="checkbox"]:checked ~ .small label::before {
+    font-size: 12px;
+    left: 3px;
+  }
+
+  input[type="checkbox"]:checked ~ .medium label::before {
+    font-size: 14px;
+    left: 5px;
+  }
+
+  input[type="checkbox"]:checked ~ .large label::before {
+    left: 7px;
   }
 `;

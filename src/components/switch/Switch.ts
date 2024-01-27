@@ -1,5 +1,6 @@
 import { LitElement, html, CSSResult } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import { switchStyles } from "./styles.ts";
 
 @customElement("my-switch")
@@ -15,6 +16,7 @@ export class MySwitch extends LitElement {
   indeterminate = false;
 
   public defaultChecked: boolean = false;
+  public size: string = "medium";
 
   // Define the event listeners for the switch component
   connectedCallback() {
@@ -31,9 +33,14 @@ export class MySwitch extends LitElement {
 
   // Define the template of the switch component
   render() {
+    const classes = {
+      small: this.size === "small",
+      medium: this.size === "medium",
+      large: this.size === "large",
+    };
     return html`
       <input type="checkbox" id="toggle" />
-      <div>
+      <div class=${classMap(classes)}>
         <label for="toggle"></label>
       </div>
     `;
