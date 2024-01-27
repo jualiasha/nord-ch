@@ -39,7 +39,7 @@ export class MyElement extends LitElement {
           count is ${this.count}
         </button>
       </div>
-      <p class="read-the-docs">${this.docsHint}</p>
+      <div class="read-the-docs">${this.docsHint}</div>
     `
   }
 
