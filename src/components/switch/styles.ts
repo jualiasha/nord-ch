@@ -12,10 +12,11 @@ export const switchStyles = css`
   input[type="checkbox"] {
     display: none;
   }
-
-  //input[type="checkbox"] :focus {
-  //  border: 20px solid var(--my-dark-yellow);
-  //}
+  div:focus {
+    transition: none;
+    outline: 3px solid var(--my-violet-blue);
+    box-shadow: none;
+  }
 
   /*Button is :CHECKED*/
 

@@ -12,6 +12,8 @@ const getMySwitch = (args: MySwitch): TemplateResult => {
     ?required=${args.required}
     @my-switch-change=${(e: { detail: { checked: boolean } }) =>
       console.log(e.detail.checked)}
+    @my-switch-focus=${() => console.log("focused")}
+    @my-switch-blur=${() => console.log("blured")}
   >
   </my-switch>`;
 };
@@ -46,7 +48,7 @@ export const Default: Story = {
     size: "medium",
     checked: false,
     disabled: false,
-    required: true,
+    required: false,
   },
 };
 

@@ -22,14 +22,10 @@ export class MySwitch extends LitElement {
   // Define the event listeners for the switch component
   connectedCallback() {
     super.connectedCallback();
-    // Add a click listener to toggle the switch
-    //this.addEventListener("click", this.handleClick);
-    // Add a change listener to update the switch state
-    //this.addEventListener("change", this.handleChange);
     // Add a focus listener to add a focus ring to the switch
-    this.addEventListener("focus", this.handleFocus);
+    this.addEventListener("focus", this.handleFocusEvent);
     // Add a blur listener to remove the focus ring from the switch
-    this.addEventListener("blur", this.handleBlur);
+    this.addEventListener("blur", this.handleBlurEvent);
   }
 
   protected willUpdate(_changedProperties: PropertyValues) {
@@ -54,7 +50,12 @@ export class MySwitch extends LitElement {
         id="toggle"
         @click=${(e: InputEvent) => e.preventDefault()}
       />
-      <div class=${classMap(classes)} @click=${this.handleClick}>
+      <div
+        tabindex="0"
+        class=${classMap(classes)}
+        @click=${this.handleClick}
+        @keydown=${this.onEnterEvent}
+      >
         <label for="toggle"></label>
         ${when(this.required, () => html`<span class="required">*</span>`)}
       </div>
@@ -69,6 +70,13 @@ export class MySwitch extends LitElement {
   private _handleInputElementChecked(): void {
     if (this._inputElement) {
       this._inputElement.checked = this.checked;
+    }
+  }
+
+  private onEnterEvent(event: KeyboardEvent) {
+    if (event.key === "Enter") {
+      // Trigger the click event
+      this.handleClick();
     }
   }
 
@@ -91,23 +99,32 @@ export class MySwitch extends LitElement {
     }
   }
 
-  handleFocus() {
-    // If the switch is focused, add a focus ring style to it
-    this.style.boxShadow = "0 0 0 2px var(--switch-focus-ring-color, #2196f3)";
+  handleFocusEvent() {
+    // If the switch is focused, send focus event
+    if (!this.disabled) {
+      const options = {
+        bubbles: true,
+        composed: true,
+      };
+      this.dispatchEvent(new CustomEvent("my-switch-focus", options));
+    }
   }
 
-  handleBlur() {
-    // If the switch is blurred, remove the focus ring style from it
-    this.style.boxShadow = "none";
+  handleBlurEvent() {
+    // If the switch is blur, send blur event
+    if (!this.disabled) {
+      const options = {
+        bubbles: true,
+        composed: true,
+      };
+      this.dispatchEvent(new CustomEvent("my-switch-blur", options));
+    }
   }
   // Define the styles of the switch component
   static styles: CSSResult = switchStyles;
   disconnectedCallback() {
     super.disconnectedCallback();
-    // Remove the event listeners from the switch
-    //this.removeEventListener("click", this.handleClick);
-    //this.removeEventListener("change", this.handleChange);
-    this.removeEventListener("focus", this.handleFocus);
-    this.removeEventListener("blur", this.handleBlur);
+    this.removeEventListener("focus", this.handleFocusEvent);
+    this.removeEventListener("blur", this.handleBlurEvent);
   }
 }
