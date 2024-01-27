@@ -5,14 +5,19 @@ import { html, TemplateResult } from "lit";
 import { Accordion } from "../components/accordion/Accordion.ts";
 
 const getMyAccordion = (args: Accordion) => {
-  return html`<my-fancy-accordion
-    ?open=${args.open}
-    .title=${args.title}
-    .toggledText=${args.toggledText}
-    .numberPoint=${args.numberPoint}
-  >
-    Here will come content
-  </my-fancy-accordion>`;
+  return html` <style>
+      span {
+        transition: inherit;
+      }
+    </style>
+    <my-fancy-accordion
+      ?open=${args.open}
+      .title=${args.title}
+      .toggledText=${args.toggledText}
+      .badge=${args.badge}
+    >
+      <span>Here will come content</span>
+    </my-fancy-accordion>`;
 };
 
 const meta = {
@@ -30,7 +35,7 @@ const meta = {
     title: { control: "text" },
     open: { control: "boolean" },
     toggledText: { control: "text" },
-    numberPoint: { control: "number" },
+    badge: { control: "number" },
   },
 } satisfies Meta<Accordion>;
 
@@ -49,7 +54,7 @@ function TemplateWIthSeveralPanels(args: Accordion): TemplateResult {
     ${getMyAccordion({
       ...args,
       title: "Contacts",
-      numberPoint: null,
+      badge: null,
       toggledText: "",
     } as Accordion)}
   `;
@@ -61,7 +66,7 @@ export const Primary: Story = {
     title: "Accounts && cards",
     open: false,
     toggledText: "available: 1300€",
-    numberPoint: 3,
+    badge: 3,
   },
 };
 
@@ -70,7 +75,7 @@ export const NoToggledText: Story = {
     title: "Accounts && cards",
     open: false,
     toggledText: "",
-    numberPoint: 3,
+    badge: 3,
   },
 };
 

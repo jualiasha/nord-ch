@@ -14,15 +14,15 @@ export class Accordion extends LitElement {
 
   // The title for the accordion panel
   public title: string = "";
-  // The number for numberPoint
-  public numberPoint: number | null = null;
+  // The value for badge
+  public badge: number | null = null;
   // query for accordion panel
   private _panel: HTMLElement | null = null;
 
   // Define the template of the element
   render(): TemplateResult {
     const classes = {
-      hidden: !this.numberPoint,
+      hidden: !this.badge,
     };
     return html`
       <div
@@ -34,7 +34,7 @@ export class Accordion extends LitElement {
         @keydown=${this.onEnterEvent}
       >
         <div class="title no-wrap">${this.title}</div>
-        <div class="number-point ${classMap(classes)}">${this.numberPoint}</div>
+        <div class="badge ${classMap(classes)}">${this.badge}</div>
         <div class="toggled-text no-wrap">${this.toggledText}</div>
         <sl-icon name=${this.open ? "caret-down" : "caret-up"}></sl-icon>
       </div>
@@ -76,7 +76,7 @@ export class Accordion extends LitElement {
       background-color: var(--my-light-black);
       color: var(--white);
       cursor: pointer;
-      padding: 18px;
+      padding: 1.12rem;
       border: 1px solid #000;
       text-align: left;
       outline: none;
@@ -85,7 +85,7 @@ export class Accordion extends LitElement {
       grid-template-columns: min-content 2rem auto 2rem;
       grid-template-rows: 1fr;
       column-gap: 0.1rem;
-      border-radius: 10px;
+      border-radius: 0.62rem;
       margin-bottom: var(--accordion-margin-bottom, 0);
     }
     .accordion:focus {
@@ -96,7 +96,7 @@ export class Accordion extends LitElement {
       justify-content: center;
       color: #c0c0c0;
     }
-    .number-point {
+    .badge {
       background-color: var(--my-violet-blue);
       display: flex;
       justify-content: center;
@@ -107,7 +107,7 @@ export class Accordion extends LitElement {
       color: var(--white);
       position: relative;
       bottom: 0.7rem;
-      font-size: 14px;
+      font-size: 0.87rem;
     }
 
     .no-wrap {
@@ -123,8 +123,8 @@ export class Accordion extends LitElement {
       transition: max-height 0.2s ease-out;
       position: relative;
       bottom: 0.7rem;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 0.62rem;
+      border-bottom-right-radius: 0.62rem;
       color: var(--white);
     }
     .hidden {

@@ -34,14 +34,14 @@ Then you can use the <my-fancy-accordion> tag in your HTML:
 </my-fancy-accordion>
 <script
 const myAccordion = document.querySelector('my-fancy-accordion')
-myAccordion.numberPoint=2
+myAccordion.badge=2
 ></script>
 ```
 
 ### lit-html
 
 ```html
-<my-fancy-accordion .title='My Accordion' ?open=false .numberpoint=3></my-fancy-accordion>
+<my-fancy-accordion .title='My Accordion' ?open=false .badge=3></my-fancy-accordion>
 ```
 
 
@@ -50,12 +50,12 @@ myAccordion.numberPoint=2
 The attribute name is equivalent to the property name, but in lowercase.
 The component accepts the following attributes:
 
-| Name        | Description                                  | Type        | Default |
-|-------------|----------------------------------------------|-------------|---------|
-| open        | Toggling open/close of accordion panel       | boolean     | false   |
-| toggledText | Middle text that is reactive and toggled     | string      | ''      |
-| title       | Main title of the accordion button           | string      | ''      |
-| numberPoint | Blue point that indicates number if not null | number/null | null    |
+| Name        | Description                                            | Type        | Default |
+|-------------|--------------------------------------------------------|-------------|---------|
+| open        | Toggling open/close of accordion panel                 | boolean     | false   |
+| toggledText | Middle text that is reactive and toggled               | string      | ''      |
+| title       | Main title of the accordion button                     | string      | ''      |
+| badge | Blue point (badge) that indicates quantity if not null | number/null | null    |
 
 ## CSS
 
@@ -84,7 +84,7 @@ my-fancy-accordion::part(panel) {
 }
 
 my-fancy-accordion{
-    --accordion-margin-bottom: 5rem
+    --accordion-margin-bottom: 5rem;
 }
 ```
 

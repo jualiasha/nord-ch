@@ -21,9 +21,9 @@ describe("Accordion", async (): Promise<void> => {
     setTimeout(() => element.click(), 1500);
     setTimeout(() => expect(element.open).toBeFalsy(), 2000);
   });
-  test("should not display point circle if there is no numberPoint", async () => {
-    const numberPoint = element.shadowRoot?.querySelector(".number-point");
-    expect(numberPoint?.classList[1]).toBe("hidden");
-    expect(element.numberPoint).toBeNull();
+  test("should not display point circle if there is no badge", async () => {
+    const badge = element.shadowRoot?.querySelector(".badge");
+    expect(badge?.classList[1]).toBe("hidden");
+    expect(element.badge).toBeNull();
   });
 });
