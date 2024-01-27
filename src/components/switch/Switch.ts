@@ -14,6 +14,8 @@ export class MySwitch extends LitElement {
   @property({ type: Boolean })
   indeterminate = false;
 
+  public defaultChecked: boolean = false;
+
   // Define the event listeners for the switch component
   connectedCallback() {
     super.connectedCallback();
@@ -30,9 +32,10 @@ export class MySwitch extends LitElement {
   // Define the template of the switch component
   render() {
     return html`
-      <div part="track"></div>
-      <div part="thumb"></div>
-      <slot name="label"></slot>
+      <input type="checkbox" id="toggle" />
+      <div>
+        <label for="toggle"></label>
+      </div>
     `;
   }
 

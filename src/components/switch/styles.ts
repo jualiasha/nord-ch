@@ -1,67 +1,97 @@
-import { css, CSSResult, html, LitElement, TemplateResult } from "lit";
+import { css } from "lit";
 
 export const switchStyles = css`
-  /* Use the :host pseudo-element to style the switch component */
-  :host {
-    display: inline-block;
-    position: relative;
-    width: 40px;
-    height: 20px;
+  *,
+  *::before,
+  *::after {
+    transition: 400ms all ease-in-out 50ms;
+    box-sizing: border-box;
+    backface-visibility: hidden;
   }
 
-  /* Use the ::part pseudo-element to style the switch track */
-  ::part(track) {
-    background-color: var(--switch-track-color, #ccc);
-    border-radius: 10px;
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  a {
+    color: rgba(43, 43, 43, 1);
+    text-decoration: none;
+    padding: 10px;
+    border-bottom: 2px solid rgba(43, 43, 43, 1);
+  }
+
+  a:hover {
+    background: rgba(43, 43, 43, 1);
+    color: rgba(255, 255, 255, 1);
+  }
+
+  /*Button is :CHECKED*/
+
+  input[type="checkbox"]:checked ~ div {
+    background: var(--my-violet-blue);
+    box-shadow: 0 0 2px var(--my-violet-blue);
+  }
+
+  input[type="checkbox"]:checked ~ div label {
+    left: 20px;
+    transform: rotate(360deg);
+  }
+
+  /*shared*/
+
+  div,
+  label {
+    border-radius: 5rem;
+  }
+
+  /*'un':checked state*/
+
+  div {
+    height: 20px;
+    width: 45px;
+    background: rgba(43, 43, 43, 1);
+    position: relative;
+    box-shadow: 0 0 2px rgba(43, 43, 43, 1);
+  }
+
+  label {
+    height: 20px;
+    width: 25px;
+    background: var(--my-dark-yellow);
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    transition: background-color 0.3s;
+    cursor: pointer;
   }
 
-  /* Use the ::part pseudo-element to style the switch thumb */
-  ::part(thumb) {
-    background-color: var(--switch-thumb-color, #fff);
-    border-radius: 50%;
+  label::before {
+    content: "off";
+    width: 0;
+    font-size: 14px;
     position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 16px;
-    height: 16px;
-    transition: transform 0.3s;
+    left: 3px;
+    top: 0;
   }
 
-  /* Use the ::slotted pseudo-element to style the switch label */
-  ::slotted(label) {
-    display: inline-block;
-    margin-left: 10px;
-    vertical-align: middle;
+  label::before,
+  label::after {
+    background: rgba(43, 43, 43, 1);
+    border-radius: 5px;
   }
 
-  /* Use attribute selectors to style the switch component based on its state */
-  :host([checked]) ::part(track) {
-    background-color: var(--switch-track-checked-color, #4caf50);
+  /* on toggle */
+
+  input[type="checkbox"]:checked ~ div label {
+    background: var(--my-vivd-cerulean);
   }
 
-  :host([checked]) ::part(thumb) {
-    transform: translateX(20px);
-  }
-
-  :host([disabled]) ::part(track) {
-    background-color: var(--switch-track-disabled-color, #e7e7e7);
-  }
-
-  :host([disabled]) ::part(thumb) {
-    background-color: var(--switch-thumb-disabled-color, #bdbdbd);
-  }
-
-  :host([indeterminate]) ::part(track) {
-    background-color: var(--switch-track-indeterminate-color, #2196f3);
-  }
-
-  :host([indeterminate]) ::part(thumb) {
-    transform: translateX(10px);
+  input[type="checkbox"]:checked ~ div label::before {
+    content: "on";
+    width: 0;
+    font-size: 14px;
+    position: absolute;
+    left: 5px;
+    top: 0;
+    background: var(--my-violet-blue);
   }
 `;
