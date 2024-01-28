@@ -1,9 +1,9 @@
 {
-  "name": "@my-repo/my-fancy-accordion",
+  "name": "@my-repo/my-switch",
   "version": "1.0.0",
   "type": "module",
-  "description": "Custom element that implements a collapsible content panel.",
-  "main": "./dist/my-fancy-accordion.js",
+  "description": "Custom element that implements switch.",
+  "main": "./dist/my-switch.js",
   "files": [
     "./dist"
   ],
@@ -15,9 +15,6 @@
     "publish:patch": "npm run prepublish && npm version patch && npm publish --no-shrinkwrap --no-optional",
     "publish:minor": "npm run prepublish && npm version minor && npm publish --no-shrinkwrap --no-optional",
     "publish:major": "npm run prepublish && npm version major && npm publish --no-shrinkwrap --no-optional"
-  },
-  "dependencies": {
-    "@shoelace-style/shoelace": "^2.13.1"
   },
   "author": "Julia Matviishyna",
   "license": "ISC"
