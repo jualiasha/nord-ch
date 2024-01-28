@@ -23,9 +23,9 @@ export class MySwitch extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     // Add a focus listener to add a focus ring to the switch
-    this.addEventListener("focus", this.handleFocusEvent);
+    this.addEventListener("focus", this._handleFocusEvent);
     // Add a blur listener to remove the focus ring from the switch
-    this.addEventListener("blur", this.handleBlurEvent);
+    this.addEventListener("blur", this._handleBlurEvent);
   }
 
   protected willUpdate(_changedProperties: PropertyValues) {
@@ -53,8 +53,8 @@ export class MySwitch extends LitElement {
       <div
         tabindex="0"
         class=${classMap(classes)}
-        @click=${this.handleClick}
-        @keydown=${this.onEnterEvent}
+        @click=${this._handleClick}
+        @keydown=${this._onEnterEvent}
       >
         <label for="toggle"></label>
         ${when(this.required, () => html`<span class="required">*</span>`)}
@@ -73,10 +73,10 @@ export class MySwitch extends LitElement {
     }
   }
 
-  private onEnterEvent(event: KeyboardEvent) {
+  private _onEnterEvent(event: KeyboardEvent) {
     if (event.key === "Enter") {
       // Trigger the click event
-      this.handleClick();
+      this._handleClick();
     }
   }
 
@@ -92,14 +92,14 @@ export class MySwitch extends LitElement {
   }
 
   // Define the methods for the switch component
-  handleClick(): void {
+  private _handleClick(): void {
     // If the switch is not disabled, toggle its checked state
     if (!this.disabled) {
       this.checked = !this.checked;
     }
   }
 
-  handleFocusEvent() {
+  private _handleFocusEvent() {
     // If the switch is focused, send focus event
     if (!this.disabled) {
       const options = {
@@ -110,7 +110,7 @@ export class MySwitch extends LitElement {
     }
   }
 
-  handleBlurEvent() {
+  private _handleBlurEvent() {
     // If the switch is blur, send blur event
     if (!this.disabled) {
       const options = {
@@ -124,7 +124,7 @@ export class MySwitch extends LitElement {
   static styles: CSSResult = switchStyles;
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeEventListener("focus", this.handleFocusEvent);
-    this.removeEventListener("blur", this.handleBlurEvent);
+    this.removeEventListener("focus", this._handleFocusEvent);
+    this.removeEventListener("blur", this._handleBlurEvent);
   }
 }
