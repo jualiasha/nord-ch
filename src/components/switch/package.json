@@ -16,9 +16,6 @@
     "publish:minor": "npm run prepublish && npm version minor && npm publish --no-shrinkwrap --no-optional",
     "publish:major": "npm run prepublish && npm version major && npm publish --no-shrinkwrap --no-optional"
   },
-  "dependencies": {
-    "@shoelace-style/shoelace": "^2.13.1"
-  },
   "author": "Julia Matviishyna",
   "license": "ISC"
 }
