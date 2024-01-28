@@ -51,12 +51,13 @@ export class MySwitch extends LitElement {
         @click=${(e: InputEvent) => e.preventDefault()}
       />
       <div
+        part="toggle"
         tabindex="0"
         class=${classMap(classes)}
         @click=${this._handleClick}
         @keydown=${this._onEnterEvent}
       >
-        <label for="toggle"></label>
+        <label for="toggle" part="label"></label>
         ${when(this.required, () => html`<span class="required">*</span>`)}
       </div>
     `;

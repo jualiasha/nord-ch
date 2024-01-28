@@ -2,9 +2,25 @@
 
 This is a custom element that implements a collapsible content panel. It is built with [Lit](https://lit.dev/) and [TypeScript](https://www.typescriptlang.org/).
 
+## Features
+
+- Inner content of the opened panel can be any and inserted as html inside the tag
+- Supports tab key focus and opens/collapses on key Enter
+- Uses click event
+- Uses shoelace icon library (comes bundled with over 1,500 icons)
+- Uses shadow DOM for style encapsulation
+
+## Installation
+
+To install this component, run the following command:
+
+```
+npm i my-fancy-accordion
+```
+
 ## Usage
 
-To use this component, you need to import it in your HTML file:
+To use this component, you need to import it in your file:
 
 ```html
 <script type="module" src="my-fancy-accordion.js"></script>

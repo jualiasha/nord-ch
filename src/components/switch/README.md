@@ -1,18 +1,29 @@
-# My Fancy Switch
+# My Switch
 
-This is a custom element that implements a collapsible content panel. It is built with [Lit](https://lit.dev/) and [TypeScript](https://www.typescriptlang.org/).
+This is a custom element that implements on &off toggle. It is built with [Lit](https://lit.dev/) and [TypeScript](https://www.typescriptlang.org/).
+
+## Features
+
+- Supports three sizes: small, medium, and large
+- Supports disabled and required states
+- Emits custom events for focus, blur, and change
+- Uses shadow DOM for style encapsulation
+
+## Installation
+
+To install this component, run the following command:
+
+```
+npm i my-switch
+```
 
 ## Usage
 
-To use this component, you need to import it in your HTML file:
+To use this component, you need to import it in your file:
 
 ```html
 <script type="module" src="my-switch.js"></script>
 ```
-
-or use it in js:
-
-To import component
 
 ```js
 import { Switch } from '/Switch.js';
@@ -33,14 +44,14 @@ Then you can use the <my-switch> tag in your HTML:
 </my-switch>
 <script
 const mySwitch = document.querySelector('my-switch')
-mySwitch.badge=2
+mySwitch.addEventListener('my-switch-change', ()=>console.log(e.detail.checked))
 ></script>
 ```
 
 ### lit-html
 
 ```html
-<my-switch .title='My Accordion' ?open=false .badge=3></my-switch>
+<my-switch @my-switch-change=${console.log(e.detail.checked)}></my-switch>
 ```
 
 
@@ -49,47 +60,46 @@ mySwitch.badge=2
 The attribute name is equivalent to the property name, but in lowercase.
 The component accepts the following attributes:
 
-| Name        | Description                                            | Type        | Default |
-|-------------|--------------------------------------------------------|-------------|---------|
-| open        | Toggling open/close of accordion panel                 | boolean     | false   |
-| toggledText | Middle text that is reactive and toggled               | string      | ''      |
-| title       | Main title of the accordion button                     | string      | ''      |
-| badge | Blue point (badge) that indicates quantity if not null | number/null | null    |
+| Name     | Description                                    | Type    | Default |
+|----------|------------------------------------------------|---------|---------|
+| checked  | Toggling on/off of the switch                  | boolean | false   |
+| disabled | Whether the switch is disabled or not          | boolean | false   |
+| required | Whether the switch is required or not          | boolean | false   |
+| size     | The size of the switch: small / medium / large | string  | medium  |
 
 ## CSS
 
 ### variables
 
-| Name                                | Description                          | Default |
-| ----------------------------------- |--------------------------------------|---------|
-| --accordion-margin-bottom         | Bottom margin of the accordion panel | 0       |
+| Name                                | Description            | Default |
+| ----------------------------------- |------------------------|---------|
+| --my-switch-required-color         | Color of required star | darkred |
 
 ### parts
 
-| Name      | Description                                                           |  
-|-----------|-----------------------------------------------------------------------|
-| accordion | Part of the main toggling button                                      |
-| panel     | Collapsable panel of the accordion that allowes to insert custom HTML |
+| Name   | Description                     |  
+|--------|---------------------------------|
+| toggle | Part of the main toggling field |
+| label  | Round switcher                  |
 
 
 ```css
-my-switch::part(accordion) {
+my-switch::part(toggle) {
   background-color: blue;
-  color: white;
-}
-
-my-switch::part(panel) {
-  background-color: yellow;
 }
 
 my-switch{
-    --accordion-margin-bottom: 5rem;
+    --my-switch-required-color: lightyellow;
 }
 ```
 
 ## Events
 
-Uses general click event to open accordion button
+| Event             | Description              | Detail            |
+|-------------------|--------------------------|-------------------|
+| my-switch-focus	  | Emitted on focus         |      |
+| my-switch-blur	   | Emitted on blur          |                 |
+| my-switch-change	 | Emitted on toggle change | checked(:boolean) |
 
 ## Accessibility
 

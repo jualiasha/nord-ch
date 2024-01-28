@@ -30,15 +30,15 @@ export const switchStyles = css`
   }
 
   input[type="checkbox"]:checked ~ .small label {
-    left: 15px;
+    left: 0.93rem;
   }
 
   input[type="checkbox"]:checked ~ .medium label {
-    left: 20px;
+    left: 1.25rem;
   }
 
   input[type="checkbox"]:checked ~ .large label {
-    left: 20px;
+    left: 1.25rem;
   }
 
   /*shared*/
@@ -51,32 +51,32 @@ export const switchStyles = css`
   /*'un':checked state*/
 
   .small {
-    height: 15px;
-    width: 35px;
+    height: 0.93rem;
+    width: 2.2rem;
   }
   .small label {
-    height: 15px;
-    width: 20px;
+    height: 0.93rem;
+    width: 1.25rem;
   }
 
   .medium {
-    height: 20px;
-    width: 45px;
+    height: 1.25rem;
+    width: 2.81rem;
   }
 
   .medium label {
-    height: 20px;
-    width: 25px;
+    height: 1.25rem;
+    width: 1.56rem;
   }
 
   .large {
-    height: 25px;
-    width: 50px;
+    height: 1.56rem;
+    width: 3.12rem;
   }
 
   .large label {
-    height: 25px;
-    width: 30px;
+    height: 1.56rem;
+    width: 1.87rem;
   }
 
   div {
@@ -105,23 +105,23 @@ export const switchStyles = css`
   }
 
   .small label::before {
-    font-size: 12px;
-    left: 2px;
+    font-size: 0.75rem;
+    left: 0.12rem;
   }
 
   .medium label::before {
-    font-size: 14px;
-    left: 3px;
+    font-size: 0.87rem;
+    left: 0.18rem;
   }
 
   .large label::before {
-    left: 4px;
+    left: 0.25rem;
   }
 
   label::before,
   label::after {
     background: rgba(43, 43, 43, 1);
-    border-radius: 5px;
+    border-radius: 0.31rem;
   }
 
   /* on toggle */
@@ -139,21 +139,21 @@ export const switchStyles = css`
   }
 
   input[type="checkbox"]:checked ~ .small label::before {
-    font-size: 12px;
-    left: 3px;
+    font-size: 0.75rem;
+    left: 0.18rem;
   }
 
   input[type="checkbox"]:checked ~ .medium label::before {
-    font-size: 14px;
-    left: 5px;
+    font-size: 0.87rem;
+    left: 0.31rem;
   }
 
   input[type="checkbox"]:checked ~ .large label::before {
-    left: 7px;
+    left: 0.43rem;
   }
 
   .required {
-    color: darkred;
+    color: var(--my-switch-required-color, darkred);
     position: absolute;
   }
 
