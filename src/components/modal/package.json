@@ -1,0 +1,21 @@
+{
+  "name": "@my-repo/my-modal",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Custom element that implements modal.",
+  "main": "./dist/my-modal.js",
+  "files": [
+    "./dist"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc --build",
+    "prepublish": "npm run clean && npm run build",
+    "publish:dryrun": "npm run prepublish && npm version prerelease --preid=test && npm publish --dry-run --no-shrinkwrap --no-optional",
+    "publish:patch": "npm run prepublish && npm version patch && npm publish --no-shrinkwrap --no-optional",
+    "publish:minor": "npm run prepublish && npm version minor && npm publish --no-shrinkwrap --no-optional",
+    "publish:major": "npm run prepublish && npm version major && npm publish --no-shrinkwrap --no-optional"
+  },
+  "author": "Julia Matviishyna",
+  "license": "ISC"
+}
