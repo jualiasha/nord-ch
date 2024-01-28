@@ -40,7 +40,6 @@ export class MyModal extends LitElement {
       <dialog
         id="dialog"
         part="dialog"
-        aria-labelledby="title"
         aria-modal="true"
         ?open=${this.open}
         @click=${this._handleClick}
