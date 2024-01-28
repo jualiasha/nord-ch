@@ -45,7 +45,10 @@ export class MyModal extends LitElement {
         @click=${this._handleClick}
       >
         <div part="header">
-          <h2 id="title" part="title">${this.title}</h2>
+          ${when(
+            this.title,
+            () => html`<h2 id="title" part="title">${this.title}</h2>`,
+          )}
           <button
             id="close"
             part="close"
@@ -88,7 +91,7 @@ export class MyModal extends LitElement {
   private _closeModal(): void {
     // Close the modal
     this.open = false; // Set the open property to false
-    this.dispatchEvent(new CustomEvent("my-modal-close")); // Dispatch a close event
+    this.dispatchEvent(new CustomEvent("my-modal-close", {})); // Dispatch a close event
   }
 
   disconnectedCallback() {
